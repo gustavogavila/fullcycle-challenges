@@ -1,0 +1,45 @@
+services:
+  people_node_app:
+    image: gustavogavila/people_node_app
+    build:
+      context: ./people_node_app
+      dockerfile: Dockerfile
+    container_name: people_node_app
+    volumes:
+      - ./people_node_app/src/app:/usr/src/app
+    tty: true
+    ports:
+      - "3000:3000"
+    networks:
+      - people_net
+
+  people_db:
+    image: mysql:9.2.0
+    restart: always
+    tty: true
+    volumes:
+      - ./people_db:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: peopledb
+      MYSQL_USER: gus
+      MYSQL_PASSWORD: gus
+    container_name: people_db
+    networks:
+      - people_net
+
+
+  people_nginx:
+    image: gustavogavila/people_nginx
+    build:
+      context: ./people_nginx
+      dockerfile: Dockerfile
+    container_name: people_nginx
+    networks:
+      - people_net
+    ports:
+      - "8080:80"
+
+networks:
+  people_net:
+    driver: bridge
+  
