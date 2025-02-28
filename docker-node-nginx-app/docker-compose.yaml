@@ -13,19 +13,19 @@ services:
     networks:
       - people_net
 
-  people_db:
-    image: mysql:9.2.0
-    restart: always
-    tty: true
-    volumes:
-      - ./people_db:/var/lib/mysql
-    environment:
-      MYSQL_DATABASE: peopledb
-      MYSQL_USER: gus
-      MYSQL_PASSWORD: gus
-    container_name: people_db
-    networks:
-      - people_net
+  # people_db:
+  #   image: mysql:9.2.0
+  #   restart: always
+  #   tty: true
+  #   volumes:
+  #     - ./people_db:/var/lib/mysql
+  #   environment:
+  #     MYSQL_DATABASE: peopledb
+  #     MYSQL_USER: gus
+  #     MYSQL_PASSWORD: gus
+  #   container_name: people_db
+  #   networks:
+  #     - people_net
 
 
   people_nginx:
@@ -38,6 +38,10 @@ services:
       - people_net
     ports:
       - "8080:80"
+    volumes:
+      - ./people_nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - people_node_app
 
 networks:
   people_net:
