@@ -13,19 +13,21 @@ services:
     networks:
       - people_net
 
-  # people_db:
-  #   image: mysql:9.2.0
-  #   restart: always
-  #   tty: true
-  #   volumes:
-  #     - ./people_db:/var/lib/mysql
-  #   environment:
-  #     MYSQL_DATABASE: peopledb
-  #     MYSQL_USER: gus
-  #     MYSQL_PASSWORD: gus
-  #   container_name: people_db
-  #   networks:
-  #     - people_net
+  people_db:
+    image: mysql:9.2.0
+    restart: always
+    tty: true
+    volumes:
+      - ./people_db:/var/lib/mysql
+      - ./init-scripts:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_DATABASE: peopledb
+      MYSQL_USER: gus
+      MYSQL_PASSWORD: gus
+      MYSQL_ROOT_PASSWORD: root
+    container_name: people_db
+    networks:
+      - people_net
 
 
   people_nginx:
