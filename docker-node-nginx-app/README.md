@@ -1,7 +1,7 @@
 # docker-node-nginx-app
 Primeira aplicação em NodeJS com NGINX.
 
-## Imagem Docker
+## Rota disponível
 ```
-
+http://localhost:8080
 ```

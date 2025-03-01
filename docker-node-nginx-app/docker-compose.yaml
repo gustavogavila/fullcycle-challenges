@@ -26,9 +26,10 @@ services:
       MYSQL_PASSWORD: gus
       MYSQL_ROOT_PASSWORD: root
     container_name: people_db
+    ports:
+      - "3306:3306"
     networks:
       - people_net
-
 
   people_nginx:
     image: gustavogavila/people_nginx
