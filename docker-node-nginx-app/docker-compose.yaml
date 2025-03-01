@@ -19,7 +19,7 @@ services:
     tty: true
     volumes:
       - ./people_db:/var/lib/mysql
-      - ./init-scripts:/docker-entrypoint-initdb.d
+      - ./init_scripts/init.sql:/docker-entrypoint-initdb.d/1.sql
     environment:
       MYSQL_DATABASE: peopledb
       MYSQL_USER: gus
